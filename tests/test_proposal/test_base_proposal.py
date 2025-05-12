@@ -76,6 +76,14 @@ def test_update_output_no_output(proposal):
     assert not hasattr(proposal, "output")
 
 
+def test_set_output_directory(proposal, tmp_path):
+    """Test the set_output_directory method"""
+    output_dir = tmp_path / "new_output"
+    Proposal.set_output_directory(proposal, output_dir)
+    assert proposal.output == output_dir
+    assert os.path.exists(output_dir)
+
+
 def test_evaluate_likelihoods(proposal):
     """Assert the correct method is called"""
     samples = numpy_array_to_live_points(np.array([[1], [2]]), ["x"])

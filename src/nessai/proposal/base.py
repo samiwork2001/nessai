@@ -78,6 +78,23 @@ class Proposal(ABC):
             os.makedirs(self.output, exist_ok=True)
         else:
             logger.debug("No output directory to update")
+            
+    def set_output_directory(self, directory: str) -> None:
+        """
+        Set or change the output directory for Nessai's output.
+        
+        This method creates the output directory if it doesn't exist
+        and sets it as the output directory for the proposal.
+        
+        Parameters
+        ----------
+        directory: str
+            Path to the new output directory
+        """
+        logger.debug(f"Setting output directory to {directory}")
+        self.output = directory
+        os.makedirs(directory, exist_ok=True)
+        logger.info(f"Output directory set to {directory}")
 
     def evaluate_likelihoods(self):
         """Evaluate the likelihoods for the pool of live points."""
